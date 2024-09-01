@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxyfefsgkgc4l"]
+
+[ext_resource type="TileSet" uid="uid://dqg14aj86so4a" path="res://Tablero/unit_path_tileset.tres" id="1_8v8di"]
+[ext_resource type="Script" path="res://Tablero/CaminoUnidades.gd" id="2_1nsmq"]
+
+[node name="CaminoUnidades" type="TileMap"]
+tile_set = ExtResource("1_8v8di")
+format = 2
+script = ExtResource("2_1nsmq")

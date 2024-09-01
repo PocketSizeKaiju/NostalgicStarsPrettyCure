@@ -1,0 +1,61 @@
+[gd_scene load_steps=14 format=3 uid="uid://30jb4kc5kf5p"]
+
+[ext_resource type="PackedScene" uid="uid://bv1ul1qynrdwd" path="res://Tablero/Cursor/Cursor.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://d4mhjq651egt" path="res://Unidades/Unidad.tscn" id="2"]
+[ext_resource type="Script" path="res://Tablero/Tablero.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://n825j345khoi" path="res://OverlayUnidades/OverlayUnidades.tscn" id="5"]
+[ext_resource type="Resource" path="res://Tablero/Grilla.tres" id="5_xy83f"]
+[ext_resource type="PackedScene" uid="uid://dxyfefsgkgc4l" path="res://Tablero/CaminoUnidades.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://dsf2gi5bc5vef" path="res://Unidades/Lemonade.png" id="8_4rdsk"]
+[ext_resource type="Texture2D" uid="uid://cg0e2btmaasnk" path="res://Unidades/Aqua.png" id="8_bqiqv"]
+[ext_resource type="Texture2D" uid="uid://lfbeg22ky41j" path="res://Unidades/Dream.png" id="9_4siiw"]
+[ext_resource type="PackedScene" uid="uid://de53ukdqyusan" path="res://Fondos/Mapa.tscn" id="10"]
+
+[sub_resource type="Curve2D" id="Curve2D_ew5db"]
+resource_local_to_scene = true
+
+[sub_resource type="Curve2D" id="Curve2D_su1fw"]
+resource_local_to_scene = true
+
+[sub_resource type="Curve2D" id="Curve2D_6bwox"]
+resource_local_to_scene = true
+
+[node name="Main" type="Node2D"]
+
+[node name="Mapa" parent="." instance=ExtResource("10")]
+
+[node name="Tablero" type="Node2D" parent="."]
+script = ExtResource("3")
+grilla = ExtResource("5_xy83f")
+
+[node name="OverlayUnidades" parent="Tablero" instance=ExtResource("5")]
+
+[node name="CaminoUnidades" parent="Tablero" instance=ExtResource("6")]
+grilla = ExtResource("5_xy83f")
+
+[node name="Cursor" parent="Tablero" instance=ExtResource("1")]
+grilla = ExtResource("5_xy83f")
+
+[node name="Aqua" parent="Tablero" instance=ExtResource("2")]
+position = Vector2(600, 480)
+curve = SubResource("Curve2D_ew5db")
+grilla = ExtResource("5_xy83f")
+skin = ExtResource("8_bqiqv")
+skin_offset = Vector2(0, 20)
+
+[node name="Lemonade" parent="Tablero" instance=ExtResource("2")]
+position = Vector2(850.293, 412.465)
+curve = SubResource("Curve2D_su1fw")
+grilla = ExtResource("5_xy83f")
+skin = ExtResource("8_4rdsk")
+skin_offset = Vector2(0, 20)
+
+[node name="Dream" parent="Tablero" instance=ExtResource("2")]
+position = Vector2(355.298, 298.556)
+curve = SubResource("Curve2D_6bwox")
+grilla = ExtResource("5_xy83f")
+skin = ExtResource("9_4siiw")
+skin_offset = Vector2(0, 20)
+
+[connection signal="aceptar_presionada" from="Tablero/Cursor" to="Tablero" method="_on_Cursor_aceptar_presionada"]
+[connection signal="movida" from="Tablero/Cursor" to="Tablero" method="_on_Cursor_movido"]
