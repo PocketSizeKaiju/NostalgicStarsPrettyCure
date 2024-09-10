@@ -25,6 +25,10 @@ window/size/height=720
 
 project/assembly_name="Tactical RPG Movement"
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 move_right={

@@ -15,7 +15,7 @@ var celda := Vector2.ZERO:
 			return
 
 		celda = nueva_celda
-		position = celda*85
+		position = grilla.calcular_posicion_mapa(celda)
 		emit_signal("movida", celda)
 		_timer.start()
 

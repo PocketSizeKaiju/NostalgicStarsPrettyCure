@@ -8,12 +8,17 @@ const DIRECCIONES = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 var _unidades := {}
 var _unidad_activa: Unidad
 var _celdas_caminables := []
+var _costos_movimientos
 
 @onready var _overlay_unidades: OverlayUnidades = $OverlayUnidades
 @onready var _camino_unidades: CaminoUnidades = $CaminoUnidades
+@onready var _mapa: TileMap = $Mapa
+
+const VALOR_MAXIMO: int = 99999
 
 
 func _ready() -> void:
+	_costos_movimientos = _mapa.obtener_costos_movimiento(grilla)
 	_reinitialize()
 
 
@@ -35,7 +40,7 @@ func esta_ocupada(celda: Vector2) -> bool:
 
 
 func obtener_celdas_caminables(unidad: Unidad) -> Array:
-	return _llenar_area_caminable(unidad.celda, unidad.rango_movimiento)
+	return _dijkstra(unidad.celda, unidad.rango_movimiento)
 
 
 func _reinitialize() -> void:
@@ -76,6 +81,53 @@ func _llenar_area_caminable(celda: Vector2, distancia_maxima: int) -> Array:
 			stack.append(coordinadas)
 	return array
 
+#genera una lista de celdas caminables basadas en el valor de movimiento de 
+#la unidad y el costo de movimiento de la celda
+func _dijkstra(celda: Vector2, distancia_maxima: int, es_atacable:bool = false) -> Array:
+	var celdas_movibles = [celda]
+	var visitado = []
+	var distancias = []
+	var previas = []
+	
+	for y in range(grilla.tamanio.y):
+		visitado.append([])
+		distancias.append([])
+		previas.append([])
+		for x in range(grilla.tamanio.x):
+			visitado[y].append(false)
+			distancias[y].append(VALOR_MAXIMO)
+			previas[y].append(null)
+		
+	var fila = FilaPrioridad.new()
+	
+	fila.agregar(celda, 0)
+	distancias[celda.y][celda.x] = 0
+	
+	var costo_celda
+	var distancia_al_nodo
+	var celdas_ocupadas = []
+	
+	while not fila.esta_vacia():
+		var actual = fila.quitar()
+		visitado[actual.valor.y][actual.valor.x] = true
+		
+		for direccion in DIRECCIONES:
+			var coordenadas = actual.valor + direccion
+			if grilla.dentro_del_limite(coordenadas):
+				if visitado[coordenadas.y][coordenadas.x]:
+					continue
+				else:
+					costo_celda = _costos_movimientos[coordenadas.y][coordenadas.x]
+					
+					distancia_al_nodo = actual.prioridad + costo_celda
+					
+					visitado[coordenadas.y][coordenadas.x] = true
+					distancias[coordenadas.y][coordenadas.x] = distancia_al_nodo
+				if distancia_al_nodo <= distancia_maxima:
+					previas[coordenadas.y][coordenadas.x] = actual.valor
+					celdas_movibles.append(coordenadas)
+					fila.agregar(coordenadas, distancia_al_nodo)
+	return celdas_movibles
 
 func _mover_unidad_activa(nueva_celda: Vector2) -> void:
 	if esta_ocupada(nueva_celda) or not nueva_celda in _celdas_caminables:

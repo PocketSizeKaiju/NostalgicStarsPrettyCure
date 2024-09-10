@@ -1,8 +1,8 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Grilla" load_steps=2 format=3 uid="uid://br6chqrr1yghv"]
 
 [ext_resource type="Script" path="res://Tablero/Grilla.gd" id="1"]
 
 [resource]
-script = ExtResource( 1 )
-size = Vector2( 20, 20 )
-cell_size = Vector2( 80, 80 )
+script = ExtResource("1")
+tamanio = Vector2(20, 20)
+tamanio_celda = Vector2(80, 80)
