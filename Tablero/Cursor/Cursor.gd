@@ -8,6 +8,8 @@ signal movida(nueva_celda)
 @export var grilla: Resource
 @export var ui_cooldown := 0.1
 
+var es_mouse = false
+
 var celda := Vector2.ZERO:
 	set(valor):
 		var nueva_celda: Vector2 = grilla.clamp_grilla(valor)
@@ -24,12 +26,18 @@ var celda := Vector2.ZERO:
 
 func _ready() -> void:
 	_timer.wait_time = ui_cooldown
+	celda = grilla.calcular_coordinadas_grilla(position)
 	position = grilla.calcular_posicion_mapa(celda)
 
+func _process(_delta):
+	if(es_mouse):
+		var coordenadas_grilla = grilla.calcular_coordinadas_grilla(get_global_mouse_position())
+		if(celda != coordenadas_grilla):
+			celda = coordenadas_grilla
 
 func _unhandled_input(evento: InputEvent) -> void:
 	if evento is InputEventMouseMotion:
-		celda = grilla.calcular_coordinadas_grilla(evento.position)
+		es_mouse = true
 	elif evento.is_action_pressed("click") or evento.is_action_pressed("ui_accept"):
 		emit_signal("aceptar_presionada", celda)
 		get_viewport().set_input_as_handled()
@@ -43,12 +51,16 @@ func _unhandled_input(evento: InputEvent) -> void:
 
 	if evento.is_action("ui_right"):
 		celda += Vector2.RIGHT
+		es_mouse = false
 	elif evento.is_action("ui_up"):
 		celda += Vector2.UP
+		es_mouse = false
 	elif evento.is_action("ui_left"):
 		celda += Vector2.LEFT
+		es_mouse = false
 	elif evento.is_action("ui_down"):
 		celda += Vector2.DOWN
+		es_mouse = false
 
 
 func _draw() -> void:

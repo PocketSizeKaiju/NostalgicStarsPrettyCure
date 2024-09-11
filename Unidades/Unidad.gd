@@ -5,8 +5,12 @@ extends Path2D
 signal termino_caminar
 
 @export var grilla: Resource
+@export var es_enemigo: bool
+@export var esta_esperando := false
 @export var rango_movimiento := 6
 @export var velocidad_movida := 600.0
+@export var rango_ataque := 0
+
 @export var skin: Texture:
 	set(value):
 		skin = value

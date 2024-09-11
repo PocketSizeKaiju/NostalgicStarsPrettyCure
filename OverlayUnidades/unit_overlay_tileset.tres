@@ -1,32 +1,19 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dkha5qr3ak12f"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dkha5qr3ak12f"]
 
-[ext_resource type="Texture2D" uid="uid://bavjy1odiaew5" path="res://OverlayUnidades/tileset_unit_overlay.svg" id="1_keyjm"]
+[ext_resource type="Texture2D" uid="uid://b23megqfhre0v" path="res://OverlayUnidades/0_tileset_unit_overlay.png" id="1_q0h2n"]
+[ext_resource type="Texture2D" uid="uid://s715dvtkpktf" path="res://OverlayUnidades/1_tileset_unit_overlay.png" id="2_ost67"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0o8vp"]
-texture = ExtResource("1_keyjm")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wmrp1"]
+texture = ExtResource("1_q0h2n")
 texture_region_size = Vector2i(80, 80)
-0:0/next_alternative_id = 8
 0:0/0 = 0
-0:0/1 = 1
-0:0/1/flip_h = true
-0:0/2 = 2
-0:0/2/flip_v = true
-0:0/3 = 3
-0:0/3/flip_h = true
-0:0/3/flip_v = true
-0:0/4 = 4
-0:0/4/transpose = true
-0:0/5 = 5
-0:0/5/flip_h = true
-0:0/5/transpose = true
-0:0/6 = 6
-0:0/6/flip_v = true
-0:0/6/transpose = true
-0:0/7 = 7
-0:0/7/flip_h = true
-0:0/7/flip_v = true
-0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q71o8"]
+texture = ExtResource("2_ost67")
+texture_region_size = Vector2i(80, 80)
+0:0/0 = 0
 
 [resource]
 tile_size = Vector2i(80, 80)
-sources/0 = SubResource("TileSetAtlasSource_0o8vp")
+sources/0 = SubResource("TileSetAtlasSource_wmrp1")
+sources/1 = SubResource("TileSetAtlasSource_q71o8")
