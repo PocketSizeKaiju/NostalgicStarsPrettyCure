@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bavjy1odiaew5"
-path="res://.godot/imported/tileset_unit_overlay.svg-51b8860663780a289cc0cce536d997b2.ctex"
+uid="uid://dclg3eeed56in"
+path="res://.godot/imported/Tactical RPG Video Game Unit Selection Finite State Machine_Flow Chart_Decision Chart.drawio.png-3e78696bd37e3d973f4035821e51a2c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OverlayUnidades/tileset_unit_overlay.svg"
-dest_files=["res://.godot/imported/tileset_unit_overlay.svg-51b8860663780a289cc0cce536d997b2.ctex"]
+source_file="res://Tactical RPG Video Game Unit Selection Finite State Machine_Flow Chart_Decision Chart.drawio.png"
+dest_files=["res://.godot/imported/Tactical RPG Video Game Unit Selection Finite State Machine_Flow Chart_Decision Chart.drawio.png-3e78696bd37e3d973f4035821e51a2c8.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
