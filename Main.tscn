@@ -11,16 +11,16 @@
 [ext_resource type="Texture2D" uid="uid://lfbeg22ky41j" path="res://Unidades/Dream.png" id="9_4siiw"]
 [ext_resource type="PackedScene" uid="uid://de53ukdqyusan" path="res://Fondos/Mapa.tscn" id="10"]
 
-[sub_resource type="Curve2D" id="Curve2D_oefst"]
+[sub_resource type="Curve2D" id="Curve2D_udsmy"]
 resource_local_to_scene = true
 
-[sub_resource type="Curve2D" id="Curve2D_2x0mv"]
+[sub_resource type="Curve2D" id="Curve2D_vv3nt"]
 resource_local_to_scene = true
 
-[sub_resource type="Curve2D" id="Curve2D_25cwm"]
+[sub_resource type="Curve2D" id="Curve2D_xpdmt"]
 resource_local_to_scene = true
 
-[sub_resource type="Curve2D" id="Curve2D_xwlpq"]
+[sub_resource type="Curve2D" id="Curve2D_chxtm"]
 resource_local_to_scene = true
 
 [node name="Main" type="Node2D"]
@@ -43,18 +43,18 @@ grilla = ExtResource("5_xy83f")
 
 [node name="Aqua" parent="Tablero" instance=ExtResource("2")]
 position = Vector2(600, 463)
-curve = SubResource("Curve2D_oefst")
+curve = SubResource("Curve2D_udsmy")
 grilla = ExtResource("5_xy83f")
 es_enemigo = false
 esta_esperando = false
-rango_movimiento = 0
+rango_movimiento = 1
 rango_ataque = 3
 skin = ExtResource("8_bqiqv")
 skin_offset = Vector2(0, 20)
 
 [node name="Lemonade" parent="Tablero" instance=ExtResource("2")]
 position = Vector2(840.293, 383.465)
-curve = SubResource("Curve2D_2x0mv")
+curve = SubResource("Curve2D_vv3nt")
 grilla = ExtResource("5_xy83f")
 es_enemigo = false
 esta_esperando = false
@@ -65,7 +65,7 @@ skin_offset = Vector2(0, 20)
 
 [node name="Dream" parent="Tablero" instance=ExtResource("2")]
 position = Vector2(360.298, 298.556)
-curve = SubResource("Curve2D_25cwm")
+curve = SubResource("Curve2D_xpdmt")
 grilla = ExtResource("5_xy83f")
 es_enemigo = false
 esta_esperando = false
@@ -76,7 +76,7 @@ skin_offset = Vector2(0, 20)
 [node name="DarkDream" parent="Tablero" instance=ExtResource("2")]
 modulate = Color(0.666755, 0.251931, 0.511438, 1)
 position = Vector2(468.298, 522.556)
-curve = SubResource("Curve2D_xwlpq")
+curve = SubResource("Curve2D_chxtm")
 grilla = ExtResource("5_xy83f")
 es_enemigo = true
 esta_esperando = true
