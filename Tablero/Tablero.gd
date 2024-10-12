@@ -13,7 +13,7 @@ var _costos_movimientos
 
 @onready var _overlay_unidades: OverlayUnidades = $OverlayUnidades
 @onready var _camino_unidades: CaminoUnidades = $CaminoUnidades
-@onready var _mapa: TileMap = $Mapa
+@onready var _mapa: TileMapLayer = $Mapa
 
 const VALOR_MAXIMO: int = 99999
 const ATLAS_ID_OBSTACULOS = 2
@@ -85,7 +85,7 @@ func _llenar_area_caminable(celda: Vector2, distancia_maxima: int) -> Array:
 			var coordenadas: Vector2 = actual + direccion
 			
 			#comentar esto si las unidades NO pueden atacar sobre las paredes y solo alrededor
-			if _mapa.get_cell_source_id(0, coordenadas) == ATLAS_ID_OBSTACULOS:
+			if _mapa.get_cell_source_id(coordenadas) == ATLAS_ID_OBSTACULOS:
 				array_paredes.append(coordenadas)
 			
 			#if esta_ocupada(coordenadas):

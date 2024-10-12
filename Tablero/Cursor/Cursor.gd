@@ -65,4 +65,3 @@ func _unhandled_input(evento: InputEvent) -> void:
 
 func _draw() -> void:
 	draw_rect(Rect2(-grilla.tamanio_celda / 2, grilla.tamanio_celda), Color.ALICE_BLUE, false, 2.0)
-

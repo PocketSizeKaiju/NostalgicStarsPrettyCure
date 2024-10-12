@@ -9,7 +9,7 @@ var _astar := AStarGrid2D.new()
 
 func _init(grilla: Grilla, celdas_caminables: Array) -> void:
 	_grilla = grilla
-	_astar.size = _grilla.tamanio
+	_astar.region = Rect2(Vector2(0,0), _grilla.tamanio)
 	_astar.cell_size = _grilla.tamanio_celda
 	_astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	_astar.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN

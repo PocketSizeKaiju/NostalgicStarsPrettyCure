@@ -48,7 +48,7 @@ var _esta_caminando := false:
 func _ready() -> void:
 	set_process(false)
 	_path_follow.rotates = false
-
+	
 	celda = grilla.calcular_coordinadas_grilla(position)
 	position = grilla.calcular_posicion_mapa(celda)
 
@@ -58,7 +58,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_path_follow.progress += velocidad_movida * delta
-
+	
 	if _path_follow.progress_ratio >= 1.0:
 		_esta_caminando = false
 		_path_follow.progress = 0.00001
@@ -70,10 +70,9 @@ func _process(delta: float) -> void:
 func caminando(camino: PackedVector2Array) -> void:
 	if camino.is_empty():
 		return
-
+	
 	curve.add_point(Vector2.ZERO)
 	for punto in camino:
 		curve.add_point(grilla.calcular_posicion_mapa(punto) - position)
 	celda = camino[-1]
 	_esta_caminando = true
-
