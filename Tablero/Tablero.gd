@@ -102,6 +102,7 @@ func _llenar_area_caminable(celda: Vector2, distancia_maxima: int) -> Array:
 #genera una lista de celdas caminables basadas en el valor de movimiento de 
 #la unidad y el costo de movimiento de la celda
 func _dijkstra(celda: Vector2, distancia_maxima: int, es_atacable:bool) -> Array:
+	var unidad_actual = _unidades[celda]
 	var celdas_movibles = [celda]
 	var visitado = []
 	var distancias = []
@@ -140,7 +141,7 @@ func _dijkstra(celda: Vector2, distancia_maxima: int, es_atacable:bool) -> Array
 					distancia_al_nodo = actual.prioridad + costo_celda
 					
 					if esta_ocupada(coordenadas):
-						if _unidad_activa.es_enemigo != _unidades[coordenadas].es_enemigo: #comentar esto para que no pueda pasar por ninguna unidad, no solo los enemigos
+						if unidad_actual.es_enemigo != _unidades[coordenadas].es_enemigo: #comentar esto para que no pueda pasar por ninguna unidad, no solo los enemigos
 							distancia_al_nodo = actual.prioridad + VALOR_MAXIMO
 						elif _unidades[coordenadas].esta_esperando and es_atacable:
 							celdas_ocupadas.append(coordenadas)
@@ -179,6 +180,13 @@ func _seleccionar_unidad(celda: Vector2) -> void:
 	
 	_camino_unidades.initialize(_celdas_caminables)
 
+func _mostrar_hover(celda: Vector2) -> void:
+	var unidad_actual = _unidades[celda]
+	_celdas_caminables = obtener_celdas_caminables(unidad_actual)
+	_celdas_atacables = obtener_celdas_atacables(unidad_actual)
+	
+	_overlay_unidades.dibujar_celdas_atacables(_celdas_atacables)
+	_overlay_unidades.dibujar_celdas_caminables(_celdas_caminables)
 
 func _deseleccionar_unidad_activa() -> void:
 	_unidad_activa.esta_seleccionada = false
@@ -201,3 +209,9 @@ func _on_Cursor_aceptar_presionada(celda: Vector2) -> void:
 func _on_Cursor_movido(nueva_celda: Vector2) -> void:
 	if _unidad_activa and _unidad_activa.esta_seleccionada:
 		_camino_unidades.draw(_unidad_activa.celda, nueva_celda)
+	elif _overlay_unidades != null and _celdas_caminables != []:
+		_celdas_caminables.clear()
+		_overlay_unidades.clear()
+	
+	if _unidades.has(nueva_celda) and _unidad_activa == null:
+		_mostrar_hover(nueva_celda)

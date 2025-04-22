@@ -67,16 +67,16 @@ datos_movimiento = {
 2: 99999
 }
 
-[sub_resource type="Curve2D" id="Curve2D_6y63j"]
+[sub_resource type="Curve2D" id="Curve2D_pa306"]
 resource_local_to_scene = true
 
-[sub_resource type="Curve2D" id="Curve2D_j8koj"]
+[sub_resource type="Curve2D" id="Curve2D_mo5uc"]
 resource_local_to_scene = true
 
-[sub_resource type="Curve2D" id="Curve2D_fmun5"]
+[sub_resource type="Curve2D" id="Curve2D_1qm5s"]
 resource_local_to_scene = true
 
-[sub_resource type="Curve2D" id="Curve2D_h7v6s"]
+[sub_resource type="Curve2D" id="Curve2D_msnnm"]
 resource_local_to_scene = true
 
 [node name="Main" type="Node2D"]
@@ -110,7 +110,7 @@ grilla = ExtResource("5_xy83f")
 
 [node name="Aqua" parent="Tablero" instance=ExtResource("2")]
 position = Vector2(600, 463)
-curve = SubResource("Curve2D_6y63j")
+curve = SubResource("Curve2D_pa306")
 grilla = ExtResource("5_xy83f")
 rango_movimiento = 1
 rango_ataque = 3
@@ -119,7 +119,7 @@ skin_offset = Vector2(0, 20)
 
 [node name="Lemonade" parent="Tablero" instance=ExtResource("2")]
 position = Vector2(840.293, 383.465)
-curve = SubResource("Curve2D_j8koj")
+curve = SubResource("Curve2D_mo5uc")
 grilla = ExtResource("5_xy83f")
 rango_movimiento = 8
 rango_ataque = 6
@@ -128,7 +128,7 @@ skin_offset = Vector2(0, 20)
 
 [node name="Dream" parent="Tablero" instance=ExtResource("2")]
 position = Vector2(360.298, 298.556)
-curve = SubResource("Curve2D_fmun5")
+curve = SubResource("Curve2D_1qm5s")
 grilla = ExtResource("5_xy83f")
 rango_ataque = 1
 skin = ExtResource("9_4siiw")
@@ -137,7 +137,7 @@ skin_offset = Vector2(0, 20)
 [node name="DarkDream" parent="Tablero" instance=ExtResource("2")]
 modulate = Color(0.666755, 0.251931, 0.511438, 1)
 position = Vector2(468.298, 522.556)
-curve = SubResource("Curve2D_h7v6s")
+curve = SubResource("Curve2D_msnnm")
 grilla = ExtResource("5_xy83f")
 es_enemigo = true
 esta_esperando = true
