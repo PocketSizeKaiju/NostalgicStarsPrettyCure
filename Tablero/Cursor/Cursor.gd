@@ -62,6 +62,10 @@ func _unhandled_input(evento: InputEvent) -> void:
 		celda += Vector2.DOWN
 		es_mouse = false
 
-
 func _draw() -> void:
 	draw_rect(Rect2(-grilla.tamanio_celda / 2, grilla.tamanio_celda), Color.ALICE_BLUE, false, 2.0)
+
+func reset_cursor() -> void:
+	if(es_mouse):
+		var coordenadas_grilla = grilla.calcular_coordinadas_grilla(get_global_mouse_position())
+		celda = coordenadas_grilla

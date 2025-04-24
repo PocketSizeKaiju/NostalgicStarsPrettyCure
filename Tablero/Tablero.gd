@@ -2,6 +2,10 @@ class_name Tablero
 extends Node2D
 
 const DIRECCIONES = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
+const VALOR_MAXIMO: int = 99999
+const ATLAS_ID_OBSTACULOS = 2
+const MenuPausa = preload("res://Menus/MenuPausa.tscn")
+const MenuAccion = preload("res://Menus/MenuAcciones.tscn")
 
 @export var grilla: Resource
 
@@ -10,13 +14,15 @@ var _unidad_activa: Unidad
 var _celdas_caminables := []
 var _celdas_atacables := []
 var _costos_movimientos
+var _celda_previa
+var _posicion_previa
 
 @onready var _overlay_unidades: OverlayUnidades = $OverlayUnidades
 @onready var _camino_unidades: CaminoUnidades = $CaminoUnidades
 @onready var _mapa: TileMapLayer = $Mapa
+@warning_ignore("unused_private_class_variable")
+@onready var _cursor: Cursor = $Cursor
 
-const VALOR_MAXIMO: int = 99999
-const ATLAS_ID_OBSTACULOS = 2
 
 func _ready() -> void:
 	_costos_movimientos = _mapa.obtener_costos_movimiento(grilla)
@@ -163,7 +169,7 @@ func _mover_unidad_activa(nueva_celda: Vector2) -> void:
 	_deseleccionar_unidad_activa()
 	_unidad_activa.caminando(_camino_unidades.camino_actual)
 	await _unidad_activa.termino_caminar
-	_limpiar_unidad_activa()
+	#_limpiar_unidad_activa()
 
 
 func _seleccionar_unidad(celda: Vector2) -> void:
@@ -171,7 +177,10 @@ func _seleccionar_unidad(celda: Vector2) -> void:
 		return
 
 	_unidad_activa = _unidades[celda]
+	_celda_previa = celda
+	_posicion_previa = _unidad_activa.position
 	_unidad_activa.esta_seleccionada = true
+	
 	_celdas_caminables = obtener_celdas_caminables(_unidad_activa)
 	_celdas_atacables = obtener_celdas_atacables(_unidad_activa)
 	
@@ -200,10 +209,24 @@ func _limpiar_unidad_activa() -> void:
 
 
 func _on_Cursor_aceptar_presionada(celda: Vector2) -> void:
-	if not _unidad_activa:
+	if not _unidad_activa and _unidades.has(celda):
 		_seleccionar_unidad(celda)
-	elif _unidad_activa.esta_seleccionada:
-		_mover_unidad_activa(celda)
+	elif _unidad_activa != null:
+		if esta_ocupada(celda) and _unidades[celda] == _unidad_activa: 
+			_unidades.erase(_unidad_activa.celda)
+			_unidades[celda] = _unidad_activa
+			_deseleccionar_unidad_activa()
+			_limpiar_unidad_activa()
+			
+			var menu_accion = MenuAccion.instantiate()
+			add_child(menu_accion)
+		elif not esta_ocupada(celda) and _celdas_caminables.has(celda):
+			await (_mover_unidad_activa(celda))
+			var menu_accion = MenuAccion.instantiate()
+			add_child(menu_accion)
+	else:
+		var menu_pausa = MenuPausa.instantiate()
+		add_child(menu_pausa)
 
 
 func _on_Cursor_movido(nueva_celda: Vector2) -> void:
@@ -215,3 +238,14 @@ func _on_Cursor_movido(nueva_celda: Vector2) -> void:
 	
 	if _unidades.has(nueva_celda) and _unidad_activa == null:
 		_mostrar_hover(nueva_celda)
+
+func _resetear_unidad() -> void:
+	if _unidad_activa != null and _unidad_activa.celda != _celda_previa:
+		_unidad_activa.position = _posicion_previa
+		_unidades.erase(_unidad_activa.celda)
+		_unidades[_celda_previa] = _unidad_activa
+		_unidad_activa.celda = _celda_previa
+		_celda_previa = null
+		_posicion_previa = null
+		_deseleccionar_unidad_activa()
+		_limpiar_unidad_activa()

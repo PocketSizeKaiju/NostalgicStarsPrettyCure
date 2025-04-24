@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3pm440w6bu0j"]
+
+[ext_resource type="Script" path="res://Menus/menu_pausa.gd" id="1_jrh2y"]
+
+[node name="MenuPausa" type="CanvasLayer"]
+script = ExtResource("1_jrh2y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -28.0
+offset_right = 20.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="BtnUnidades" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Unidades
+"
+
+[node name="BtnOpciones" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Opciones"
+
+[node name="BtnVacio" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+text = " "
+
+[node name="BtnTerminarTurno" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Terminar turno"
+
+[node name="BtnCerrar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Cerrar"
+
+[connection signal="pressed" from="VBoxContainer/BtnUnidades" to="." method="_on_btn_unidades_pressed"]
+[connection signal="pressed" from="VBoxContainer/BtnOpciones" to="." method="_on_btn_opciones_pressed"]
+[connection signal="pressed" from="VBoxContainer/BtnTerminarTurno" to="." method="_on_btn_terminar_turno_pressed"]
+[connection signal="pressed" from="VBoxContainer/BtnCerrar" to="." method="_on_btn_cerrar_pressed"]
