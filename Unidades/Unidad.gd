@@ -68,11 +68,14 @@ func _process(delta: float) -> void:
 
 
 func caminando(camino: PackedVector2Array) -> void:
-	if camino.is_empty():
+	if camino.is_empty() || camino.size() <= 1:
 		return
 	
+	curve.clear_points()
 	curve.add_point(Vector2.ZERO)
-	for punto in camino:
-		curve.add_point(grilla.calcular_posicion_mapa(punto) - position)
+	
+	for i in range(1, camino.size()):
+		curve.add_point(grilla.calcular_posicion_mapa(camino[i]) - position)
+	
 	celda = camino[-1]
 	_esta_caminando = true
